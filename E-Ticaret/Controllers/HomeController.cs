@@ -1,4 +1,5 @@
-﻿using System;
+﻿using E_Ticaret.Models.DataModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,15 @@ namespace E_Ticaret.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            return View();
+        }
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(FormCollection frm)
+        {         
             return View();
         }
     }

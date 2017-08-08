@@ -1,0 +1,61 @@
+﻿ @model E_Ticaret.Models.Helper.UserLogin
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Layouts/Home.cshtml";
+}
+<div class="breadcrumbs">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+            <li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+            <li class="active">Giriş</li>
+        </ol>
+    </div>
+</div>
+<div class="login">
+    <div class="container">
+        <h2>Giriş Yap</h2>
+        <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
+            @Html.BeginForm("Login","Home",FormMethod.Post,new { @enctype="multipart/form-data"})
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true,"",new { @class="text-danger"})
+                @ViewBag.Mesaj
+                <div class="form-group">
+                    <div>
+                        @Html.EditorFor(model=>model.Email,new { htmlAttributes=new {@placeholder="Email Giriniz" } })
+                        @Html.ValidationMessageFor(model=>model.Email)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        @Html.PasswordFor(model => model.Password, new  { @placeholder = "Şifre Giriniz" })
+                        @Html.ValidationMessageFor(model => model.Password)
+                    </div>
+                </div>
+                <div>
+                    <div class="forgot">
+                        <a href="#">Şifremi Unuttum</a>
+                        <label style="float:right; font-size:14px">
+                            @Html.CheckBox("RememberMe", false, htmlAttributes: new { @style = "float:left; margin-left:120px;" })Beni Hatırla
+                        </label>
+                    </div>                                                                  
+                </div>
+                <br />    
+                <div class="form-group">
+                    <input type="submit" value="Giriş" />
+                </div>    
+            </div>
+            @*<form method="post">
+                <input type="email" name="email" placeholder="Email Giriniz" required=" ">
+                <input type="password"name="password" placeholder="Şifre giriniz" required=" ">
+                <div class="forgot">
+                    <a href="#">Şifremi Unuttum</a>
+                </div>
+                <input type="submit" value="Login">
+            </form>*@
+        </div>
+        <p><a href="registered.html">Kayıt Ol</a>veya<a href="index.html">Ana Sayfa<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></p>
+    </div>
+</div>
+

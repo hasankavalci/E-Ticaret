@@ -924,6 +924,9 @@ a.w3_agile_vimeo:hover{
 .forgot {
     margin: 1.5em 0 0;
 }
+.rememberme{
+    float:right;
+}
 .login-form-grids input[type="submit"]{
 	outline: none;
     border: none;
