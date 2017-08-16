@@ -44,13 +44,67 @@ namespace E_Ticaret.Controllers
             {
                 return RedirectToAction("Index","Home");
             }
-            UserNameSurname ToEdit = new UserNameSurname();
-            ToEdit.ID = Convert.ToInt32(Session["UserID"]);
-            var ToEditFromDB = _db.Users.Where(x => x.BaseUserID == ToEdit.ID).Select(x => new { x.Name, x.SurName }).FirstOrDefault();
-            ToEdit.Name = ToEditFromDB.Name;
-            ToEdit.SurName = ToEditFromDB.SurName;
+            int ID = Convert.ToInt32(Session["UserID"]);
+            UserNameSurname ToEdit = Converter.ToUserNameSurName(_db.Users.Where( x => x.BaseUserID ==ID).Select(x => new {x.Name, x.SurName }).FirstOrDefault());          
+            return View(ToEdit);         
+        }
+        [HttpPost]
+        public ActionResult ChangeNameSurName(FormCollection frm)
+        {
+            int ViewID =Convert.ToInt32(Session["UserID"]);
+            string ViewName = frm.Get("Name");
+            string ViewSurName = frm.Get("SurName");
+            BaseUser ToEdit = _db.Users.FirstOrDefault(x => x.BaseUserID == ViewID);
+            ToEdit.Name = ViewName;
+            ToEdit.SurName = ViewSurName;
+            if (_db.SaveChanges() > 0)
+            {
+                Session["AdiSoyadi"] = ToEdit.Name + " " + ToEdit.SurName;
+            }
+            return RedirectToAction("SuccessPage", "Admin");
+        }
+        public ActionResult ChangePassword()
+        {
+            UserPassword ToEdit = new UserPassword();
             return View(ToEdit);
-          
+        }
+        [HttpPost]
+        public ActionResult ChangePassword(FormCollection frm)
+        {
+            int UserID = Convert.ToInt32(Session["UserID"]);
+            string ViewOldPassword = frm.Get("OldPassword");
+            var Query = _db.Users.Where(x => x.BaseUserID == UserID && x.Password == ViewOldPassword);
+            if (Query.Count() > 0)
+            {
+                string ViewNewPassword = frm.Get("NewPassword");
+                string ViewNewPasswordAgain = frm.Get("NewPasswordAgain");
+                if (ViewNewPassword == ViewNewPasswordAgain)
+                {
+                    BaseUser ToEdit = _db.Users.FirstOrDefault(x => x.BaseUserID == UserID);
+                    ToEdit.Password = ViewNewPassword;
+                    if (_db.SaveChanges() > 0)
+                    {
+                        return RedirectToAction("SuccessPage", "Admin");
+                    }
+                    else
+                    {
+                        ViewBag.Mesaj = "Eski Şifreniz Ve Yeni Şifreniz Aynı Olmamalı";
+                    }
+                }
+                else
+                {
+                    ViewBag.Mesaj = "Yeni Şifreleriniz Uyuşmuyor";
+                }
+            }
+            else
+            {
+                ViewBag.Mesaj = "Eski Şifreniz Hatalı";
+            }
+           return View();
+        }
+        public ActionResult SuccessPage()
+        {
+            return View();
         }
        
         
