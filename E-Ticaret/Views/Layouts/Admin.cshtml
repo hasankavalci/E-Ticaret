@@ -1341,8 +1341,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <a href="index.html"><span class=" name-caret">@Session["AdiSoyadi"]</span></a>
                 <ul>
                     @*<li>@Html.ActionLink("Ayarlar","Settings","Admin")"><i class="lnr lnr-cog"></i></li>*@
-                    <li><a class="tooltips" href="Admin/Settings"><span>Ayarlar</span><i class="lnr lnr-cog"></i></a></li>
-                    <li><a class="tooltips" href="Home/LogOut"><span>Çıkış</span><i class="lnr lnr-power-switch"></i></a></li>
+                    <li><a class="tooltips" href=@Url.Content("~/Admin/Settings")><span>Ayarlar</span><i class="lnr lnr-cog"></i></a></li>
+                    <li><a class="tooltips" href=@Url.Content("~/Home/LogOut")><span>Çıkış</span><i class="lnr lnr-power-switch"></i></a></li>
                 </ul>
             </div>
             <!--//down-->

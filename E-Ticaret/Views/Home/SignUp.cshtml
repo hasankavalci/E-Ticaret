@@ -1,0 +1,57 @@
+﻿@model E_Ticaret.Models.Helper.UserSingUp
+
+@{
+    ViewBag.Title = "SignUp";
+    Layout = "~/Views/Layouts/Home.cshtml";
+}
+
+<div class="register">
+    <div class="container">
+        <h2>Üye Ol</h2>
+        <div class="login-form-grids">
+            <h5>Kişisel Bilgiler</h5>
+            <form action="#" method="post">
+
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @placeholder = "Adınızı Giriniz" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+
+                @Html.EditorFor(model => model.SurName, new { htmlAttributes = new { @placeholder = "Soyadınızı Giriniz" } })
+                @Html.ValidationMessageFor(model => model.SurName, "", new { @class = "text-danger" })
+
+
+                <h6>Giriş Bilgileri</h6>
+
+
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @placeholder = "Email Giriniz" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @placeholder = "Şifre Giriniz" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+
+                @Html.EditorFor(model => model.PasswordAgain, new { htmlAttributes = new { @placeholder = "Şifreyi Tekrar Giriniz" } })
+                @Html.ValidationMessageFor(model => model.PasswordAgain, "", new { @class = "text-danger" })
+
+                <div class="register-check-box">
+                    <div class="check">
+                        @Html.CheckBoxFor(model=>model.TermAndConditions)@Html.ActionLink("Kullanım Koşullarını Kabul Ediyorum","TermAndConditions","Home")
+                        <br />
+                        @*<label class="checkbox"><input type="checkbox" name="checkbox"><i> </i>Kullanım Koşullarını Kabul Ediyor musun?</label>*@
+                    </div>
+                </div>
+                @ViewBag.Mesaj
+                <input type="submit" value="KAYDOL">
+            </form>
+        </div>
+        <div class="register-home">
+            @Html.ActionLink("AnaSayfa", "Index", "Home")
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

@@ -56,5 +56,62 @@ namespace E_Ticaret.Controllers
             Session.Remove("Authority");
             return RedirectToAction("Index", "Home");
         }
+        public ActionResult SignUp()
+        {
+            UserSingUp ToSingUp = new UserSingUp();
+            return View(ToSingUp);
+        }
+        [HttpPost]
+        public ActionResult SignUp(FormCollection frm)
+        {
+            UserSingUp ToConfirm = new UserSingUp();
+            ToConfirm.TermAndConditions = Convert.ToBoolean(frm.Get("TermAndConditions"));
+            string ViewPassword = frm.Get("Password");
+            string ViewPasswordAgain = frm.Get("PasswordAgain");
+            string ViewName = frm.Get("Name");
+            string ViewSurName = frm.Get("SurName");
+            string ViewEmail = frm.Get("Email");
+            BaseUser ToAdd = new BaseUser();
+            ToAdd.Authority = "UnConfirmed";
+            ToAdd.Email = ViewEmail;
+            ToAdd.Name = ViewName;
+            ToAdd.Password = ViewPassword;
+            ToAdd.SurName = ViewSurName;
+            ToConfirm.Name = ViewName;
+            ToConfirm.SurName = ViewSurName;
+            ToConfirm.Email = ViewEmail;
+            if (ViewPassword != ViewPasswordAgain)
+            {
+                ViewBag.Mesaj = "Şifreler Uyuşmuyor";
+                return View(ToConfirm);
+            }
+            if (!ToConfirm.TermAndConditions)
+            {
+                ViewBag.Mesaj = "Sisteme Kayıt Olmak İçin Kullanıcı Sözleşmesini Onaylamanız Gerekir";
+                return View(ToConfirm);
+            }
+            _db.Users.Add(ToAdd);
+            if (_db.SaveChanges() > 0)
+            {
+                return RedirectToAction("SuccessPage", "Home");
+            }
+            else
+            {
+                ViewBag.Mesaj = "Veri Tabanı Bağlantısı Sırasında Bir Hata Oluştu";
+            }
+            return View(ToConfirm);
+        }
+        public ActionResult SuccessPage()
+        {
+            return View();
+        }
+        public ActionResult TermAndConditions()
+        {
+            return View();
+        }
+        public ActionResult Help()
+        {
+            return View();
+        }
     }
 }

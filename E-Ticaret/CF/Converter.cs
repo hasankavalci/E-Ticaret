@@ -11,7 +11,6 @@ namespace E_Ticaret.CF
         public static UserNameSurname ToUserNameSurName(dynamic ToConvert)
         {
             UserNameSurname ToSend = new UserNameSurname();
-            ToSend.ID = ToConvert.BaseUserID;
             ToSend.Name = ToConvert.Name;
             ToSend.SurName = ToConvert.SurName;
             return ToSend;

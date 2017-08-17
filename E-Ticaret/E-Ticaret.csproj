@@ -314,6 +314,7 @@
     <Compile Include="Models\Helper\UserLogin.cs" />
     <Compile Include="Models\Helper\UserNameSurname.cs" />
     <Compile Include="Models\Helper\UserPassword.cs" />
+    <Compile Include="Models\Helper\UserSingUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -341,6 +342,10 @@
     <Content Include="Views\Admin\ChangeNameSurName.cshtml" />
     <Content Include="Views\Admin\ChangePassword.cshtml" />
     <Content Include="Views\Admin\SuccessPage.cshtml" />
+    <Content Include="Views\Home\SuccessPage.cshtml" />
+    <Content Include="Views\Home\SignUp.cshtml" />
+    <Content Include="Views\Home\TermAndConditions.cshtml" />
+    <Content Include="Views\Home\Help.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

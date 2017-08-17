@@ -12,17 +12,20 @@ namespace E_Ticaret.Models.Helper
 
         [StringLength(100,ErrorMessage ="Şifre 3 Karakterden Az Olamaz",MinimumLength =3)]
         [DataType(DataType.Password)]
-        [Display(Name ="Eski Şifrenizi Giriniz")]       
+        [Display(Name ="Eski Şifrenizi Giriniz")]
+        [Required(ErrorMessage = "Lütfen Eski Şifrenizi Giriniz")]
         public string OldPassword { get; set; }
 
         [StringLength(100, ErrorMessage = "Şifre 3 Karakterden Az Olamaz", MinimumLength = 3)]
         [DataType(DataType.Password)]
         [Display(Name = "Yeni Şifrenizi Giriniz")]
+        [Required(ErrorMessage = "Lütfen Yeni Şifrenizi Giriniz")]
         public string NewPassword { get; set; }
 
         [StringLength(100, ErrorMessage = "Şifre 3 Karakterden Az Olamaz", MinimumLength = 3)]
         [DataType(DataType.Password)]
         [Display(Name = "Yeni Şifrenizi Tekrar Giriniz")]
+        [Required(ErrorMessage = "Lütfen Yeni Şifrenizi Tekrar Giriniz")]
         public string NewPasswordAgain { get; set; }
     }
 }
